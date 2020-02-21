@@ -11,7 +11,7 @@ int main(){
 		scanf("%d", &a);
 		(a == 1) ? count = count : ++count;
 	}
-	printf("%d", count);
+	printf("%d\n", count);
 
 	return 0;
 }
