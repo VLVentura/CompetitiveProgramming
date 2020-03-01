@@ -2,15 +2,6 @@
 
 using namespace std;
 
-size_t factorial(size_t n){
-
-	size_t fatorial{1};
-	for(size_t i = n; i > 0; --i)
-    	fatorial *= i;
-
-    return fatorial;
-}
-
 int main(){
 	
 	size_t M{0}, L{0}, X{0}, K{0}, Y{0}, count{0};
@@ -41,10 +32,10 @@ int main(){
 		++index;
 	}
 
-	size_t fac = factorial(7);
+	size_t stop {5040};
 	index = 0;
 
-	while((fac > 0) && (flag == true)){
+	while((stop > 0) && (flag == true)){
 		size_t n{0};
 		for(size_t i{0}; i < m[index].size(); ++i){
 			n = m[index][i];
@@ -54,7 +45,7 @@ int main(){
 		++count;
 		if(v.sum() == 0) flag = false;
 		(index == (m.size() - 1)) ? index = 0 : ++index;
-		--fac;
+		--stop;
 	}
 
 	printf("%ld\n", (flag == false) ? count : -1);
