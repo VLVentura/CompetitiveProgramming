@@ -4,9 +4,11 @@ using namespace std;
 
 int main(){
 	
-	size_t a,b,t;
+	string s1;
 
-	scanf("%ld", &t);
+	while(getline(cin, s1)){
+		cout << s1 << endl;
+	}
 
 	return 0;
 }
