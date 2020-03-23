@@ -1,10 +1,10 @@
 MSG = add UVa solutions
-SRC = 11942\ -\ Lumberjack\ Sequencing.cpp
+SRC = 12015\ -\ Google\ is\ Feeling\ Lucky.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
 
-teste:
+test:
 	@./a < in > out
 
 in:
@@ -22,7 +22,8 @@ delete:
 	ls
 
 git:
-	@git add .;\
+	@rm -f a in out;\
+	git add .;\
 	git commit -m "$(MSG)";\
 	git push
 
