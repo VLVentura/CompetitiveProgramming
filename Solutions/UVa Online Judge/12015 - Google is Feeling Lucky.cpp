@@ -23,8 +23,6 @@ int main(){
 		for(const auto &v: sites) (v.second == big) ? printf("%s\n", v.first) : big = big;
 		sites.clear();
 	}
-
-
-
+	
 	return 0;
 }

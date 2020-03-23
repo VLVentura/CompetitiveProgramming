@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 12015\ -\ Google\ is\ Feeling\ Lucky.cpp
+SRC = 12157\ -\ Tariff\ Plan.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
