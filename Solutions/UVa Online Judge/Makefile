@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10114\ -\ Loansome\ Car\ Buyer.cpp
+SRC = 10963\ -\ The\ Swallowing\ Ground.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
