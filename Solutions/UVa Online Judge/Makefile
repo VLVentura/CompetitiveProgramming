@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 12157\ -\ Tariff\ Plan.cpp
+SRC = 12503\ -\ Robot\ Instructions.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
