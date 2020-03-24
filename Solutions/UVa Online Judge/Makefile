@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 12554\ -\ A\ Special\ Song.cpp
+SRC = 10114\ -\ Loansome\ Car\ Buyer.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
