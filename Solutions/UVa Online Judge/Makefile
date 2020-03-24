@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 12503\ -\ Robot\ Instructions.cpp
+SRC = 12554\ -\ A\ Special\ Song.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
