@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10963\ -\ The\ Swallowing\ Ground.cpp
+SRC = 119\ -\ Greedy\ Gift\ Givers.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
