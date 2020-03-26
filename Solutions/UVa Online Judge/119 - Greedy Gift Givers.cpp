@@ -61,6 +61,8 @@ int main(){
 			printf("%s %d\n", guests[i], money[i]);
 			i++;
 		}
+
+		delete [] *guests;
 	}
 	
 	return 0;
