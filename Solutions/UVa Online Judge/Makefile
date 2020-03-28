@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 119\ -\ Greedy\ Gift\ Givers.cpp
+SRC = 11507\ -\ Bender\ B.\ Rodríguez\ Problem.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
