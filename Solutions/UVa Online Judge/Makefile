@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 661\ -\ Blowing\ Fuses.cpp
+SRC = 10141\ -\ Request\ for\ Proposal.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
