@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 11507\ -\ Bender\ B.\ Rodríguez\ Problem.cpp
+SRC = 661\ -\ Blowing\ Fuses.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
