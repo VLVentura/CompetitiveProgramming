@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10141\ -\ Request\ for\ Proposal.cpp
+SRC = 10424\ -\ Love\ Calculator.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
@@ -9,7 +9,7 @@ test:
 
 in:
 	@> in;\
-	nano in
+	subl in
 
 run:
 	@./a
