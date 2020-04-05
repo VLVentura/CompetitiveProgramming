@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10424\ -\ Love\ Calculator.cpp
+SRC = 10919\ -\ Prerequisites?.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
