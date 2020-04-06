@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10919\ -\ Prerequisites?.cpp
+SRC = 11586\ -\ Train\ Tracks.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
