@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 11683\ -\ Laser\ Sculputre.cpp
+SRC = 11683\ -\ Laser\ Sculpture.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
