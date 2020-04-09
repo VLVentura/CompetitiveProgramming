@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 353\ -\ Pesky\ Palindromes.cpp
+SRC = 401\ -\ Palindromes.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
