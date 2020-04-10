@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10945\ -\ Mother\ bear.cpp
+SRC = 11221\ -\ Magic\ square\ palindromes.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
