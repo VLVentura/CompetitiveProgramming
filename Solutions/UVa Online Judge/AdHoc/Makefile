@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10018\ -\ Reverse\ and\ Add.cpp
+SRC = 10945\ -\ Mother\ bear.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
