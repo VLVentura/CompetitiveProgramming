@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 11221\ -\ Magic\ square\ palindromes.cpp
+SRC = 11309\ -\ Counting\ Chaos.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
