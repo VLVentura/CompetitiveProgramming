@@ -22,7 +22,7 @@ bool alphabetical_order(string str1, string str2){
 			if((str1[i] - LOWER_TO_UPPER) != str2[i])
 				return (str1[i] - LOWER_TO_UPPER) < str2[i];
 			else if((str1[i] - LOWER_TO_UPPER) == str2[i])
-				return str2[i] < str2[i];
+				return str1[i] < str2[i];
 		}	
 	}
 }
