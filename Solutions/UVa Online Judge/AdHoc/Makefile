@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 156\ -\ Ananagrams.cpp
+SRC = 195\ -\ Anagram.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
