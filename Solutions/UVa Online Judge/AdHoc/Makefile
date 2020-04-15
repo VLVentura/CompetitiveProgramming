@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 630\ -\ Anagrams\ II.cpp
+SRC = 10098\ -\ Generating\ Fast.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
