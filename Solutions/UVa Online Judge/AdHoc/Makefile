@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10098\ -\ Generating\ Fast.cpp
+SRC = 162\ -\ Beggar\ My\ Neighbour.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
