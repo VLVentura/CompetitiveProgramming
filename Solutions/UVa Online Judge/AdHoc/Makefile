@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 162\ -\ Beggar\ My\ Neighbour.cpp
+SRC = 462\ -\ Bridge\ Hand\ Evaluator.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
