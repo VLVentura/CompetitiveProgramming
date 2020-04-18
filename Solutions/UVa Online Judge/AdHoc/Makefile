@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 462\ -\ Bridge\ Hand\ Evaluator.cpp
+SRC = 555\ -\ Bridge\ Hands.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
