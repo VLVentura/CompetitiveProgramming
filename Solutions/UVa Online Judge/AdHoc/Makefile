@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 10205\ -\ Stack\ em\ Up.cpp
+SRC = 10646\ -\ What\ is\ the\ Card.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
