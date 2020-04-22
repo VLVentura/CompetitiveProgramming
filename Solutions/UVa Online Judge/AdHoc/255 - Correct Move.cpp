@@ -62,6 +62,13 @@ bool king_move(int &k_row, int &k_col, int &nq_row, int &nq_col, int &nq){
 	return true;
 }
 
+int should_stop(int &k, int &nq){
+	if((k == 56 && nq == 49) || (k == 0 && nq == 9) || (k == 63 && nq == 54) || (k == 7 && nq == 14))
+		return -2;
+	
+	return 1;
+}
+
 int move_queen(int &q, int &nq, int &k){
 
 	int q_row = get_row(q);
@@ -86,19 +93,11 @@ int move_queen(int &q, int &nq, int &k){
 		}
 		else if(!king_move(k_row, k_col, nq_row, nq_col, nq))
 			return 0;
-		else{
-			if((k == 56 && nq == 49) || (k == 0 && nq == 9) || (k == 63 && nq == 54) || (k == 7 && nq == 14))
-				return -2;
-			else
-				return 1;
-		} 	
-	}
-	else{
-		if((k == 56 && nq == 49) || (k == 0 && nq == 9) || (k == 63 && nq == 54) || (k == 7 && nq == 14))
-			return -2;
 		else
-			return 1;
+			should_stop(k, nq);
 	}
+	else
+		should_stop(k, nq);
 }
 
 int main(){
