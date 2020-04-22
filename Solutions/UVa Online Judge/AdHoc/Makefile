@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 255\ -\ Correct\ Move.cpp
+SRC = 278\ -\ Chess.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
