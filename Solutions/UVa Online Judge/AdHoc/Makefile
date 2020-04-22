@@ -1,17 +1,20 @@
 MSG = add UVa solutions
-SRC = 11678\ -\ Cards\ Exchange.cpp
+SRC = 255\ -\ Correct\ Move.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
 
-test:
+tout:
 	@./a < in > out
+
+t:
+	@./a < in 
 
 in:
 	@> in;\
 	subl in
 
-run:
+r:
 	@./a
 
 clean:
