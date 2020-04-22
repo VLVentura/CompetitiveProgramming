@@ -1,5 +1,5 @@
 MSG = add UVa solutions
-SRC = 278\ -\ Chess.cpp
+SRC = 696\ -\ How\ Many\ Knights.cpp
 
 prog: $(SRC)
 	g++ -std=c++11 -Wall -O2 $(SRC) -o a -g
