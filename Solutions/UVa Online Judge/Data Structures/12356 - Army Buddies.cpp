@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+using namespace std::chrono;
 
 void initialize(int *left, int *right, int &S){
 	for(int i = 1; i <= S; ++i){
@@ -20,7 +21,7 @@ int main(){
 		
 		int left[S+1];
 		int right[S+1];
-		initialize(left, right, S);
+		iota(left, right, S);
 
 		while(B--){
 			scanf("%d %d", &leftMost, &rightMost);
@@ -41,9 +42,8 @@ int main(){
 				printf("%d\n", right[rightMost]);
 			}
 		}
-
 		printf("-\n");
 	}
-
+	
 	return 0;
 }
