@@ -2,6 +2,14 @@
 
 using namespace std;
 
+/*
+	*PROBLEMA FINALIZADO - MAS COM TLE!
+
+	**POSSIVEL SOLUÇÃO PARA NÃO TER MAIS TLE:
+
+	TALVEZ USAR DP PARA A SOLUÇÃO DESSE PROBLEMA SEJA A FORMA MAIS FÁCIL DE DRIBLAR O TLE!
+*/
+
 #define error(args...) {string _s = #args; replace(_s.begin(), _s.end(), ',', ' ');\
 						stringstream _ss(_s);\
 						istream_iterator<string> _it(_ss);\
