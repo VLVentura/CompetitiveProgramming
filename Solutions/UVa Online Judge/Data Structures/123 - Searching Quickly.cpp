@@ -2,21 +2,6 @@
 
 using namespace std;
 
-/*
-	*PROBLEMA NÃO FINALIZADO!
-
-	**POSSÍVEL SOLUÇÃO PARA ESCAPAR DO USO DO MAP E SET:
-
-	TALVEZ USAR CLASSE OU STRUCT PARA GUARDAR AS PALAVRAS REPETIDAS EM UMA FRASE, COM UM CONTADOR
-	QUE SINALIZA QUAL A PALAVRA QUE DEVE SER CONVERTIDA NO MOMENTO(1a, 2a, 3a...) 
-
-	one fish two fish three fish -> cnt = 0  
-	-----------------------------------------
-	one FISH two fish three fish -> cnt = 2 
-	one fish two FISH three fish -> cnt = 3  
-	one fish two fish three FISH -> cnt = 4 - FIM
-*/
-
 #define error(args...) {string _s = #args; replace(_s.begin(), _s.end(), ',', ' ');\
 						stringstream _ss(_s);\
 						istream_iterator<string> _it(_ss);\
@@ -29,14 +14,34 @@ void err(istream_iterator<string> it, T a, Args... args) {
 }
 #define debug(...) error(__VA_ARGS__); cout << "\n";
 
-void become_upper_case(string &str, string &text, vector<pair<string, string>> &vec){
+struct WordsRepeated{
+	int qnt_in_phrase;
+	string phrase;
+	string word;
+};
+
+struct Words{
+	string word;
+	string show_phrase;
+	string cmp_phrase;
+};
+
+void become_upper_case(vector<Words> &vec, WordsRepeated &wr){
 	string str_upper;
-	transform(str.begin(), str.end(), back_inserter(str_upper), [] (char c) {return toupper(c);});
+	transform(wr.word.begin(), wr.word.end(), back_inserter(str_upper), [] (char c) {return toupper(c);});
 
-	string temp(text);
-	temp.replace(temp.find(str), str.length(), str_upper);
+	int i = 1;
+	string temp(wr.phrase);
+	size_t found = temp.find(wr.word);
 
-	vec.emplace_back(make_pair(str_upper, temp));
+	while(i < wr.qnt_in_phrase){
+		found = temp.find(wr.word, found+1);
+		++i;
+	}
+	temp.replace(found, wr.word.length(), str_upper);
+
+	Words print = {str_upper, temp, wr.phrase};
+	vec.emplace_back(print);
 }
 
 int main(){
@@ -45,7 +50,7 @@ int main(){
 	cin.tie(NULL);	
 	
 	string str;
-	vector<pair<string, string>> to_print;
+	vector<Words> to_print;
 	vector<string> ignore, text;
 	bool is_text = false;
 
@@ -66,6 +71,7 @@ int main(){
 	}
 
 	stringstream temp;
+	vector<WordsRepeated> words_key;
 
 	for(int i = 0; i < (int)text.size(); ++i){
 		temp << text[i];
@@ -85,7 +91,31 @@ int main(){
 			}
 
 			if(!is_equal){
-				become_upper_case(str, text[i], to_print);
+				WordsRepeated temp;
+
+				if(words_key.empty()){
+					temp.qnt_in_phrase = 1;
+					temp.phrase = text[i];
+					temp.word = str;
+
+					words_key.emplace_back(temp);
+				}else{
+					auto it = find_if(words_key.begin(), words_key.end(), 
+						[&] (WordsRepeated wr) {return str == wr.word && text[i] == wr.phrase;});
+
+					if(it == words_key.end()){
+						temp.qnt_in_phrase = 1;
+						temp.phrase = text[i];
+						temp.word = str;
+
+						words_key.emplace_back(temp);
+					}
+					else{
+						++it->qnt_in_phrase;
+						temp = *it;
+					}
+				}
+				become_upper_case(to_print, temp);
 			}
 
 			str.clear();
@@ -94,10 +124,23 @@ int main(){
 		temp.clear();
 	}
 
-	sort(to_print.begin(), to_print.end());
+	sort(to_print.begin(), to_print.end(), 
+		[&text] (Words w, Words m){
+			if(w.word != m.word){
+				return w.word < m.word;
+			}
+			else if(w.word == m.word && w.cmp_phrase == m.cmp_phrase){
+				return w.show_phrase < m.show_phrase;
+			}
 
-	for(pair<string,string> &p: to_print){
-		cout << p.second << "\n";
+			auto it_w = find(text.begin(), text.end(), w.cmp_phrase);
+			auto it_m = find(text.begin(), text.end(), m.cmp_phrase);
+
+			return it_w < it_m;
+		});
+
+	for(Words &w: to_print){
+		cout << w.show_phrase << "\n";
 	}
 
 	return 0;
