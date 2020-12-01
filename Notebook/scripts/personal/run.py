@@ -18,17 +18,20 @@ class Run:
             if 'problem' not in os.listdir('.'):
                 os.mkdir('./problem')
                 os.chdir('problem/')
-                os.system('> in.in')
+                os.system('> in.in && > output.out')
                 os.chdir('..')
             return ('cp Template.cpp problem/ && cp run.py problem/', '<<< Creating workspace >>>')
         if mode == '-c':
-            return ('g++ -std=c++11 -Wall -O2 ' + self.getFileName() + ' -o program', '<<< Compiling >>>')
+            return ('g++ -std=c++14 -Wall -O2 ' + self.getFileName() + ' -o program', '<<< Compiling >>>')
         if mode == '-r':
             return ('./program', '<<< Running >>>')
         if mode == '-tout':
             return ('./program < in.in > out.out', '<<< Test with output in out file >>>')
         if mode == '-tp':
             return ('./program < in.in', '<<< Test with print output >>>')
+        if mode == '-diff':
+            # Need to install colordiff
+            return ('colordiff -s -c out.out output.out', '<<< Checking differences between two outputs')
         if mode == '-sv':
             return ('cp {} {}/{}.cpp'.format(self.getFileName(), self.path, self.name), '<<< Copying file >>>')
         if mode == '-rm':
