@@ -1,0 +1,33 @@
+{
+    "path": "",
+    "script_compile": {
+       "normal": "g++ -std=c++14 -O2 -Wall",
+       "pedantic": "g++ -std=c++14 -O2 -Wall -pedantic"
+    },
+    "nt": {
+        "script_run": "problem.exe",
+        "compare": {
+            "message": "fc command do not show '\\n' (new line) character at the end of file!",
+            "command": "fc out.out cmp.out"
+        },
+        "test": {
+            "out": "problem.exe < in.in > out.out",
+            "in": "problem.exe < in.in"
+        },
+        "remove_files": "del *.out *.in problem.exe",
+        "make_files": "copy NUL in.in & copy NUL out.out & copy NUL cmp.out"
+    },
+    "posix": {
+        "script_run": "./problem",
+        "compare": {
+            "message": "if nothing was printed they're identical",
+            "command": "diff out.out cmp.out"
+        },
+        "test": {
+            "out": "./problem < in.in > out.out",
+            "in": "./problem < in.in"
+        },
+        "remove_files": "rm *.out *.in problem",
+        "make_files": "> in.in ; > out.out ; > cmp.out"
+    }
+}
