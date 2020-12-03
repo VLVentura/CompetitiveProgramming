@@ -1,12 +1,19 @@
 # Como usar
 
-## Método 1
+## Windows
+
+```bash
+python run.py <flags>
+```
+## Linux
+
+### Método 1
 
 ```bash
 python3 ./run.py <flags>
 ```
 
-## Método 2
+### Método 2
 
 Você pode especificar o caminho do seu interpretador  na __1ª Linha__ do arquivo __run.py__ e executar o arquivo apenas com ```./run.py```.
 
@@ -22,7 +29,7 @@ Executar:
 ./run.py <flags>
 ```
 
-# Lista de flags
+## Lista de flags
 
 1. ```-c``` ```-compile``` Compilam o arquivo ```.cpp``` do diretório.
 
@@ -32,17 +39,15 @@ Executar:
 
     Podem entender a saída do comando [nesse](http://www.bosontreinamentos.com.br/linux/como-comparar-arquivos-no-linux-com-cmp-comm-diff-e-sdiff/) site.
 
-    * Se usarem linux, recomendo instalar o __colordiff__ e usa-lo em vez do __diff__, podem instalar por meio do gerenciador de pacote de vocês, se usam uma distribuição Debian/Ubuntu:
+     Se usar __linux__, recomendo instalar o __colordiff__ e usa-lo em vez do __diff__, pode ser instalado por meio do gerenciador de pacote da sua distribuição. Se usar uma distribuição Debian/Ubuntu:
 
     ```bash
     sudo apt install colordiff
     ```
-    vá no arquivo ```mainscipt.py``` e substitua a função __compare__ do arquivo, pela função abaixo.
+    vá no arquivo ```mainscipt.py``` e substitua a string __command__ do arquivo, pela string abaixo.
      
     ```py
-    41  def compare(self):
-            print('<<< Comparing out.out and cmp.out - if nothing was printed they\'re identical >>>')
-            os.system('colordiff -s -c out.out cmp.out')
+    49  command = 'colordiff -s -c out.out cmp.out'
     ```
 
 4. ```-tin``` Testa o programa com os dados do arquivo __in.in__.
@@ -54,12 +59,18 @@ Executar:
 7. ```-rmfiles``` Remove os arquivos __in.in__, __out.out__, __cmp.out__ e __problem__.
 
 8. ```-sv <nome do arquivo>``` Irá salvar o arquivo com o nome que você passou, no diretório que você irá especificar. No arquivo ```mainscript.py```, especifique o caminho como string para a constante ```PATH_TO_SAVE_FILE```.
+
+    * OBS:
+        1. No __Linux__ o caminho do arquivo deve ser no formato ```foo/boo/```
+        2. No __Windows__ deve ser no fomato ```C:\foo\boo``` 
     
     * OBS: Não combine a flag ```-sv``` com mais nenhuma outra! __Essa__ deve ser usada __sozinha__.
  
 * OBS: Mais de uma flag pode ser combinada, so precisa respeitar a ordem, não adianda testar algo que não compilado ainda!
 
-# Exemplos
+## Exemplos
+
+### Linux
 
 ```bash
 python3 ./run.py -c -tout -cmp
@@ -72,4 +83,19 @@ python3 ./run.py -c -cmp
 ```
 ```bash
 python3 ./run.py -sv Teste
+```
+
+### Windows
+
+```bash
+python run.py -c -tout -cmp
+```
+```bash
+python run.py -c -r
+```
+```bash
+python run.py -c -cmp
+```
+```bash
+python run.py -sv Teste
 ```

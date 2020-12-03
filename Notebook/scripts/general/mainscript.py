@@ -2,7 +2,7 @@ import os
 
 class Script:
 
-    PATH_TO_SAVE_FILE = ''
+    PATH_TO_SAVE_FILE = r''
 
     def __init__(self, args):
         self.args = args
@@ -37,15 +37,22 @@ class Script:
 
     def script_run(self):
         print('<<< Running >>>')
-        os.system('./problem')
+        command = 'problem.exe' if os.name == 'nt' else './problem'
+        os.system(command)
 
     def compare(self):
-        print('<<< Comparing out.out and cmp.out - if nothing was printed they\'re identical >>>')
-        os.system('diff out.out cmp.out')
+        if os.name == 'nt':
+            warning = 'fc command do not show the \'\\n\' (new line) character in the end of the file!' 
+            command = 'fc'
+        else:
+            warning = 'if nothing was printed they\'re identical'
+            command = 'diff'
+        print('<<< Comparing out.out and cmp.out - {} >>>'.format(warning))
+        os.system('{} out.out cmp.out'.format(command))
 
     def test(self, out):
         print('<<< Testing >>>')
-        command = './problem'
+        command = 'problem.exe' if os.name == 'nt' else './problem'
         if out:
             command += ' < in.in > out.out'
         else:
@@ -54,18 +61,25 @@ class Script:
     
     def remove_files(self):
         print('<<< Removing Files >>>')
-        os.system('rm *.out *.in problem')
+        command = 'del' if os.name == 'nt' else 'rm'
+        extension = '.exe' if os.name == 'nt' else ''
+        os.system('{} *.out *.in problem{}'.format(command, extension))
     
     def make_files(self):
         print('<<< Making Files >>>')
-        os.system('> in.in')
-        os.system('> out.out')
-        os.system('> cmp.out')
+        command = 'copy NUL' if os.name == 'nt' else '>'
+        os.system('{} in.in'.format(command))
+        os.system('{} out.out'.format(command))
+        os.system('{} cmp.out'.format(command))
     
     def save(self, name):
         name = ' '.join(name)
         print('<<< Copying File >>>')
-        os.system('cp {} {}/{}.cpp'.format(self.get_file_name(), Script.PATH_TO_SAVE_FILE, self.format_file_name(name)))
+        if os.name == 'nt':
+            command = 'copy {} {}'.format(self.get_file_name(), self.format_file_name(name))
+        else:
+            command = 'cp {} {}/{}.cpp'.format(self.get_file_name(), Script.PATH_TO_SAVE_FILE, self.format_file_name(name))
+        os.system(command)
         del self.args[2:]
 
     def get_file_name(self):
@@ -75,4 +89,6 @@ class Script:
         print('Missing .cpp file')
     
     def format_file_name(self, name):
+        if os.name == 'nt':
+            return '\"{}\{}.cpp\"'.format(Script.PATH_TO_SAVE_FILE, name)
         return name.replace(' ', '\ ')
