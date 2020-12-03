@@ -37,7 +37,7 @@ Executar:
     ```bash
     sudo apt install colordiff
     ```
-    vão no arquivo ```mainscipt.py``` e substituam a função compare do arquivo, pela função abaixo.
+    vá no arquivo ```mainscipt.py``` e substitua a função __compare__ do arquivo, pela função abaixo.
      
     ```py
     41  def compare(self):
