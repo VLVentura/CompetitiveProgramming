@@ -24,7 +24,7 @@ class Script:
         try:
             for i in range(1, len(self.args)):
                 function, argv = self.flags[self.args[i]]
-                if argv:
+                if argv != None:
                     function(argv)
                 else:
                     function()
@@ -36,6 +36,7 @@ class Script:
         os.system('g++ {} -o problem -std=c++14 -O2 -Wall'.format(self.get_file_name()))
 
     def script_run(self):
+        print('<<< Running >>>')
         os.system('./problem')
 
     def compare(self):
