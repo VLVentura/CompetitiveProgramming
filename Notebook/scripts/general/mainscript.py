@@ -40,7 +40,7 @@ class Script:
 
     def compare(self):
         print('<<< Comparing out.out and cmp.out - if nothing was printed they\'re identical >>>')
-        os.system('colordiff out.out cmp.out')
+        os.system('diff out.out cmp.out')
 
     def test(self, out):
         print('<<< Testing >>>')

@@ -17,7 +17,6 @@ Arquivo __run.py__:
 ```py
 1 #!/usr/bin/env python3.8
 ```
-
 Executar:
 ```bash
 ./run.py <flags>
@@ -33,6 +32,19 @@ Executar:
 
     Podem entender a saída do comando [nesse](http://www.bosontreinamentos.com.br/linux/como-comparar-arquivos-no-linux-com-cmp-comm-diff-e-sdiff/) site.
 
+    * Se usarem linux, recomendo instalar o __colordiff__ e usa-lo em vez do __diff__, podem instalar por meio do gerenciador de pacote de vocês, se usam uma distribuição Debian/Ubuntu:
+
+    ```bash
+    sudo apt install colordiff
+    ```
+    vão no arquivo ```mainscipt.py``` e substituam a função compare do arquivo, pela função abaixo.
+     
+    ```py
+    41  def compare(self):
+            print('<<< Comparing out.out and cmp.out - if nothing was printed they\'re identical >>>')
+            os.system('colordiff -s -c out.out cmp.out')
+    ```
+
 4. ```-tin``` Testa o programa com os dados do arquivo __in.in__.
 
 5. ```-tout``` Testa o programa com os dados do arquivo __in.in__ e a saída direcionada para __out.out__. Se não tiver nenhum dado de entrada no arquivo __in.in__, a saída será redirecionada sem erros para o arquivo __out.out__.
@@ -46,8 +58,6 @@ Executar:
     * OBS: Não combine a flag ```-sv``` com mais nenhuma outra! __Essa__ deve ser usada __sozinha__.
  
 * OBS: Mais de uma flag pode ser combinada, so precisa respeitar a ordem, não adianda testar algo que não compilado ainda!
-
-
 
 # Exemplos
 
