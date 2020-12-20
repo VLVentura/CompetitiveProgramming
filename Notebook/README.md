@@ -76,8 +76,8 @@ Estou usando a versão ```-std=c++14```, caso você queira uma outra versão, v�
     ```
 
     * OBS:
-        1. No __Linux__ o caminho do arquivo deve ser no formato ```foo/boo/```
-        2. No __Windows__ deve ser no fomato ```C:\\foo\\boo``` 
+        1. No __Linux__ o caminho do arquivo deve ser no formato ```foo/bar/```
+        2. No __Windows__ deve ser no fomato ```C:\\foo\\bar``` 
     
     * OBS: Não combine a flag ```-sv``` com mais nenhuma outra! __Essa__ deve ser usada __sozinha__.
  

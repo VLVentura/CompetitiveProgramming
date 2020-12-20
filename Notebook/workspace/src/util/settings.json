@@ -1,0 +1,54 @@
+{
+    "path_to_save_file": "",
+    "default_language": "cpp",
+    "compiler": {
+        "cpp": {
+            "default_version": "14",
+            "pedantic": false,
+            "compile": "g++ -O2 -Wall -std=c++"
+        },
+        "java": {
+            "compile": "javac -Xlint:all"
+        }
+    },
+    "test": {
+        "output_to_file": " < in.in > out.out",
+        "std_output": " < in.in"
+    },
+    "nt": {
+        "remove_files": "del *.in *.out *.class problem.exe",
+        "copy": "copy",
+        "delete": "del",
+        "run": {
+            "cpp": "problem.exe",
+            "java": "java Main",
+            "py": "python"
+        },
+        "compare": {
+            "warning_message": "fc command do not show the '\\n' (new line) character at the end of file!",
+            "execute" : "fc out.out cmp.out",
+            "command": "fc"
+        },
+        "make": {
+            "input_and_output_files": "copy NUL in.in & copy NUL out.out & copy NUL cmp.out"
+        }
+    },
+    "posix": {
+        "remove_files": "rm *.in *.out *.class problem",
+        "copy": "cp",
+        "delete": "rm",
+        "run": {
+            "cpp": "./problem",
+            "java": "java Main",
+            "py": "python3"
+        },
+        "compare": {
+            "warning_message": "if nothing was printed they're identical",
+            "execute" : "diff out.out cmp.out",
+            "command": "diff"
+        },
+        "make": {
+            "input_and_output_files": "> in.in ; > out.out ; > cmp.out"
+        }
+    }
+}
