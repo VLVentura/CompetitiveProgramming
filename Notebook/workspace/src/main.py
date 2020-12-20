@@ -79,8 +79,6 @@ class Script:
         default_version = self._settings['compiler']['cpp']['default_version']
         pedantic = self._settings['compiler']['cpp']['pedantic']
         pedantic_choices = [1, True] if pedantic is False else [0, False]
-        yes_to_all = self._settings['yes_to_all']
-        yes_choices = [1, True] if yes_to_all is False else [0, False]
 
         compiler.add_argument('-l', '--lang', type=str, default=default_language, choices=['cpp', 'java', 'py'],
                               help='select the language to program: ' + default_language + ' by default')
