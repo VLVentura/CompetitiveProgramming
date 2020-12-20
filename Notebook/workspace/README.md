@@ -4,11 +4,26 @@
 
 * Se for usar ```Java```, o nome do arquivo precisar ser ```Main.java``` e, consequentemente, a classe principal precisa ter o nome ```Main```. Como é um padrão usado pelos juízes online, eu decidi manter o mesmo padrão.
 
+## Requisitos
+
+1. **BeautifulSoup4**: 
+
+    ```bash
+    pip install beautifulsoup4
+    ```
+
+2. **Requests**:
+
+    ```bash
+    pip install requests
+    ```
+
 ## Windows
 
 ```bash
 python run.py <flags>
 ```
+
 ## Linux
 
 ### Método 1
