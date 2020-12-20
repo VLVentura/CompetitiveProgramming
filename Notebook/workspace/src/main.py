@@ -21,7 +21,6 @@ class Script:
         file_name = self._file_name_to_save()
         args_to_compile = [self._args['version'], self._args['pedantic']]
         language = self._args['lang']
-        util.YES_TO_ALL = self._args['yes_to_all']
 
         excluded_args = ['version', 'lang', 'pedantic', 'uri_problem', 'cf_problem', 'yes_to_all']
         args = [
@@ -119,7 +118,5 @@ class Script:
         judges.add_argument('-urip', '--uri-problem', help='get tests cases from this uri problem', type=int)
         judges.add_argument('-cf', '--code-forces', help='CodeForces "API"', action='store_true')
         judges.add_argument('-cfp', '--cf-problem', help='get tests cases from this code forces problem', type=str)
-        judges.add_argument('-y', '--yes-to-all', type=bool, default=yes_to_all, choices=yes_choices,
-                            help='answer \'y\' to all the questions that will show? {} by default'.format(yes_to_all))
 
         return vars(parser.parse_args())
