@@ -11,10 +11,11 @@ class Script:
         self._args = self._get_args()
 
     def run(self):
+        judges_list = ['uri', 'cf', 'uva']
         for arg, function in self._get_execute():
-            if arg and function[0] not in ['uri', 'cf']:
+            if arg and function[0] not in judges_list:
                 ScriptsController.execute(function[0], function[1])
-            elif arg and function[0] in ['uri', 'cf']:
+            elif arg and function[0] in judges_list:
                 ApiController.execute(function[0], function[1])
 
     def _get_execute(self):
@@ -22,7 +23,7 @@ class Script:
         args_to_compile = [self._args['version'], self._args['pedantic']]
         language = self._args['lang']
 
-        excluded_args = ['version', 'lang', 'pedantic', 'uri_problem', 'cf_problem', 'yes_to_all']
+        excluded_args = ['version', 'lang', 'pedantic', 'uri_problem', 'cf_problem', 'uva_problem', 'yes_to_all']
         args = [
             val for key, val in self._args.items() if key not in excluded_args
         ]
@@ -31,7 +32,7 @@ class Script:
             ('test_in', language), ('test_out', language), ('test_cases', self._args['test_cases']),
             ('make_files', language), ('remove_files', None), ('compare', None),
             ('save', file_name), ('copy', file_name),
-            ('uri', self._args['uri_problem']), ('cf', self._args['cf_problem'])
+            ('uri', self._args['uri_problem']), ('cf', self._args['cf_problem']), ('uva', self._args['uva_problem'])
         ]
         return zip(args, commands)
 
@@ -58,7 +59,7 @@ class Script:
         
         - General Options*
             -r\n
-            -t | -tin | -tout\n
+            -t | -tin | -tout | -tc\n
             -mkfiles | rmfiles\n
             -cmp\n
             -sv actual file name(default) | -cp
@@ -66,6 +67,7 @@ class Script:
         - Judges\n
             -uri -urip=problem**\n
             -cf -cfp=problem**\n
+            -uva -uvap=problem**\n
         
         * -> optional\n
         ** -> required
@@ -116,5 +118,7 @@ class Script:
         judges.add_argument('-urip', '--uri-problem', help='get tests cases from this uri problem', type=int)
         judges.add_argument('-cf', '--code-forces', help='CodeForces "API"', action='store_true')
         judges.add_argument('-cfp', '--cf-problem', help='get tests cases from this code forces problem', type=str)
+        judges.add_argument('-uva', '--uva-judge', help='UVa "API"', action='store_true')
+        judges.add_argument('-uvap', '--uva-problem', help='get tests cases from this uva problem', type=int)
 
         return vars(parser.parse_args())

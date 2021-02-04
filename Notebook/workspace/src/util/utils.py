@@ -8,9 +8,14 @@ def get_settings():
         return json.load(file)
 
 
+def get_authorization_code():
+    return get_settings()['udebug_authorization_code']
+
+
 JUDGES_FOLDER_NAME = {
     'uri': 'Uri',
-    'cf': 'CodeForces'
+    'cf': 'CodeForces',
+    'uva': 'UVa'
 }
 
 num_cpp_files = len(list(pathlib.Path().glob(r'*.cpp')))

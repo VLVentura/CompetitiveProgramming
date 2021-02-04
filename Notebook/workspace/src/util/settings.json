@@ -1,4 +1,5 @@
 {
+    "udebug_authorization_code": "CODE_GOES_HERE",
     "path_to_save_file": "",
     "default_language": "cpp",
     "compiler": {

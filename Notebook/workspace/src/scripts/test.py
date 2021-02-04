@@ -55,8 +55,10 @@ class Test:
 
         for i in range(len(os.listdir(problem_folder + 'input/'))):
             os.system(command_to_run + ' < {}in{}.in\' > out.out'.format(input_path, i))
-            output_from_compare = subprocess.run([command_to_compare, 'out.out', '{}cmp{}.out'.format(output_path, i)],
-                                                 capture_output=True)
+            output_from_compare = subprocess.run(
+                [command_to_compare, 'out.out', '{}cmp{}.out'.format(output_path, i)], 
+                capture_output=True
+            )
             if output_from_compare.returncode == 1:
                 print(colors.CRED2 + colors.CBOLD + ' X | TEST CASE #{} - FAILED'.format(i + 1) + colors.CEND)
                 print(output_from_compare.stdout.decode('utf-8'))

@@ -139,7 +139,9 @@ Executar:
 
 15. ```-cf -cfp=<problema>``` ```--code-forces --cf-problem=<problema>``` Irá criar o diretório ```TestCases/CodeForces/<problema>``` com os casos de teste do problema.
 
-16. ```-tc <judge> <poblem>``` ```--test-cases <judge> <poblem>``` Testa os casos de teste do problema no seu codigo e compara com a saída esperada.
+16. ```-uva -uvap=<problema>``` ```--uva-judge --uva-problem=<problema>``` Irá criar o diretório ```TestCases/Uva/<problema>``` com os casos de teste do problema.
+
+17. ```-tc <judge> <poblem>``` ```--test-cases <judge> <poblem>``` Testa os casos de teste do problema no seu codigo e compara com a saída esperada.
 
 * OBS: Mais de uma flag pode ser combinada, so precisa respeitar a ordem, não adianda testar algo que não compilado ainda!
 

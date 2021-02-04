@@ -6,33 +6,33 @@ from bs4 import BeautifulSoup
 class Cf:
     def __init__(self, problem: str):
         """
-        :return param problemData: list of tuples -> tuple[0]: input, tuple[1]: input
+        :return param problem_data: list of tuples -> tuple[0]: input, tuple[1]: input
         """
         self._problem = self._parser_problem(problem)
         self._url = 'https://codeforces.com/problemset/problem/{}/{}'.format(self._problem[0], self._problem[1])
         self._page = requests.get(self._url)
         self._html = BeautifulSoup(self._page.content, 'html.parser')
 
-        self._problemData = self._get_test_cases()
-        self._problemName = '{} - {}'.format(problem, self._get_problem_name())
+        self._problem_data = self._get_test_cases()
+        self._problem_name = '{} - {}'.format(problem, self._get_problem_name())
 
     @property
-    def problemData(self):
-        return self._problemData
+    def problem_data(self):
+        return self._problem_data
 
     @property
-    def problemName(self):
-        return self._problemName
+    def problem_name(self):
+        return self._problem_name
 
     def _get_test_cases(self):
-        testCases = []
-        testInput = self._html.find_all('div', {'class': 'input'})
-        testOutput = self._html.find_all('div', {'class': 'output'})
-        for i in range(len(testInput)):
-            testCases.append(
-                (self._parser(testInput[i], 'Input'), self._parser(testOutput[i], 'Output'))
+        test_cases = []
+        test_input = self._html.find_all('div', {'class': 'input'})
+        test_output = self._html.find_all('div', {'class': 'output'})
+        for i in range(len(test_input)):
+            test_cases.append(
+                (self._parser(test_input[i], 'Input'), self._parser(test_output[i], 'Output'))
             )
-        return testCases
+        return test_cases
 
     def _get_problem_name(self):
         content = self._html.find_all('div', {'class': 'title'})

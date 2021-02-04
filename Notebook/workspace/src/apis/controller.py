@@ -2,6 +2,7 @@ import os
 
 from src.apis.cf import Cf
 from src.apis.uri import Uri
+from src.apis.uva import Uva
 
 import src.util.colors as colors
 import src.util.utils as util
@@ -10,7 +11,8 @@ import src.util.utils as util
 class ApiController:
     _judges = {
         'uri': Uri,
-        'cf': Cf
+        'cf': Cf,
+        'uva': Uva
     }
     _judges_folder_name = util.JUDGES_FOLDER_NAME
 
@@ -18,20 +20,18 @@ class ApiController:
     def execute(judge, problem):
         problem_data = ApiController.get_data(judge, problem)
         path_to_problem = ApiController.create_folders(judge, problem_data['name'])
-        ApiController.create_files(path_to_problem, problem_data)
+        ApiController.create_files(judge, path_to_problem, problem_data['test_cases'])
 
     @staticmethod
-    def create_files(path_to_problem, problem_data):
-        problem_name = problem_data['name']
-        problem_data = problem_data['test_cases']
-
+    def create_files(judge, path_to_problem, problem_data):
         print(colors.CBLUE2 + colors.CBOLD + 'CREATING TEST CASES' + colors.CEND)
         for i, path in enumerate(problem_data):
             with open(path_to_problem + 'input/in{}.in'.format(i), 'w') as file:
                 file.write(problem_data[i][0])
             with open(path_to_problem + 'output/cmp{}.out'.format(i), 'w') as file:
                 file.write(problem_data[i][1])
-                file.write('\n')
+                if judge != 'uva':
+                    file.write('\n')
 
     @staticmethod
     def create_folders(judge, problem_name):
@@ -78,9 +78,13 @@ class ApiController:
             param name -> 'cf': str
             param problem -> '1461F': str
 
+        -UVa
+            param name -> 'uva': str
+            param problem -> '272': int
+
         - Return: dict\n
             dict['name'] -> problem name\n
             dict['test_cases'] -> test cases[0]: input, test_cases[1]: output
         """
         judge = ApiController._judges[name](problem)
-        return {'name': judge.problemName, 'test_cases': judge.problemData}
+        return {'name': judge.problem_name, 'test_cases': judge.problem_data}
