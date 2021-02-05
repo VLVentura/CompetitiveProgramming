@@ -30,7 +30,7 @@ class Cf:
         test_output = self._html.find_all('div', {'class': 'output'})
         for i in range(len(test_input)):
             test_cases.append(
-                (self._parser(test_input[i], 'Input'), self._parser(test_output[i], 'Output'))
+                (self._parser(test_input[i], 'Input'), self._parser(test_output[i], 'Output', add_new_line=True))
             )
         return test_cases
 
@@ -38,10 +38,13 @@ class Cf:
         content = self._html.find_all('div', {'class': 'title'})
         return content[0].text.split('.')[1].strip()
 
-    def _parser(self, content, parse):
+    def _parser(self, content, parse, add_new_line=False):
         content = str(content).replace('<br/>', '\n').replace(parse, '')
         content = BeautifulSoup(content, 'html.parser').text
-        return '\n'.join([s.strip() for s in content.strip().split('\n')])
+        content = '\n'.join([s.strip() for s in content.strip().split('\n')])
+        if add_new_line:
+            content += '\n'
+        return content
 
     def _parser_problem(self, problem):
         return re.match(r'([0-9]+)([a-zA-Z]+)', problem).groups()

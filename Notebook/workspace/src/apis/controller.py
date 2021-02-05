@@ -20,18 +20,16 @@ class ApiController:
     def execute(judge, problem):
         problem_data = ApiController.get_data(judge, problem)
         path_to_problem = ApiController.create_folders(judge, problem_data['name'])
-        ApiController.create_files(judge, path_to_problem, problem_data['test_cases'])
+        ApiController.create_files(path_to_problem, problem_data['test_cases'])
 
     @staticmethod
-    def create_files(judge, path_to_problem, problem_data):
+    def create_files(path_to_problem, problem_data):
         print(colors.CBLUE2 + colors.CBOLD + 'CREATING TEST CASES' + colors.CEND)
         for i, path in enumerate(problem_data):
             with open(path_to_problem + 'input/in{}.in'.format(i), 'w') as file:
                 file.write(problem_data[i][0])
             with open(path_to_problem + 'output/cmp{}.out'.format(i), 'w') as file:
                 file.write(problem_data[i][1])
-                if judge != 'uva':
-                    file.write('\n')
 
     @staticmethod
     def create_folders(judge, problem_name):
