@@ -11,8 +11,7 @@ int main(){
 		unsigned short int min{100}, max{0};
 		scanf(" %hd", &n);
 		for(size_t i{0}; i < n; ++i){
-			scanf(" %hd", &s
-				);
+			scanf(" %hd", &s);
 			if(s > max) max = s;
 			if(s < min) min = s;
 		}
