@@ -1,7 +1,6 @@
 {
     "udebug_authorization_code": "CODE_GOES_HERE",
-    "path_to_save_file": "",
-    "default_language": "cpp",
+    "path_to_save_file": "PATH_TO_SAVE_FILE",
     "compiler": {
         "cpp": {
             "default_version": "14",
@@ -17,7 +16,7 @@
         "std_output": " < in.in"
     },
     "nt": {
-        "remove_files": "del *.in *.out *.class problem.exe",
+        "remove_files": "del *.in *.out *.class problem.exe LOG.txt",
         "copy": "copy",
         "delete": "del",
         "run": {
@@ -35,7 +34,7 @@
         }
     },
     "posix": {
-        "remove_files": "rm *.in *.out *.class problem",
+        "remove_files": "rm *.in *.out *.class problem LOG.txt",
         "copy": "cp",
         "delete": "rm",
         "run": {

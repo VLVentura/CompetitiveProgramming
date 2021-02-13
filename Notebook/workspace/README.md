@@ -54,17 +54,7 @@ Executar:
 
 2. ```-c``` ```--compile``` Compila o arquivo ```.cpp``` ou ```.java``` do diretório.
 
-3. ```-l``` ```--lang``` Informa a linguagem de programação que voce está usando, para compilar ou apenas executar. 
-
-    * Por padrão esta ```cpp```. As opções são: ```cpp```, ```java``` e ```py```.
-
-    Se você quiser que mudar a linguagem padrão, vá ao arquivo ```src/util/settings.json``` e mude a linha abaixo para alguma das 3 opções acima.
-
-    ```json
-        3   "default_language": "cpp"
-    ```
-
-4. **[OPÇÃO PARA C++]** ```-v=14``` ```--version=14``` Compila o arquivo ```.cpp``` com a versão informada.
+3. **[OPÇÃO PARA C++]** ```-v=14``` ```--version=14``` Compila o arquivo ```.cpp``` com a versão informada.
 
     * Por padrão essa opção esta ```14```.  As opções são: ```11```,  ```14``` e ```17```.
 
@@ -74,7 +64,7 @@ Executar:
         6   "default_version": "14"
     ```
 
-5. **[OPÇÃO PARA C++]** ```-pd=0``` ```--pedantic=0``` Compila o arquivo ```.cpp``` com a flag ```-pedantic```. 
+4. **[OPÇÃO PARA C++]** ```-pd=0``` ```--pedantic=0``` Compila o arquivo ```.cpp``` com a flag ```-pedantic```. 
 
     * Por padrão essa opção esta ```false```.  As opções são: ```true (1)``` ou ```false (0)```.
 
@@ -84,13 +74,13 @@ Executar:
         7   "pedantic": false
     ```
 
-6. ```-r``` ```--run``` Executa o programa.
+5. ```-r``` ```--run``` Executa o programa.
 
-7. ```-tin``` ```--test-in``` Executa o programa com a entrada redirecionada para o arquivo ```in.in``` e saída padrão.
+6. ```-tin``` ```--test-in``` Executa o programa com a entrada redirecionada para o arquivo ```in.in``` e saída padrão.
 
-8. ```-tout``` ```--test-out``` Executa o programa com a entrada redirecionada para o arquivo ```in.in``` e saída redirecionada para o arquivo ```out.out```.
+7. ```-tout``` ```--test-out``` Executa o programa com a entrada redirecionada para o arquivo ```in.in``` e saída redirecionada para o arquivo ```out.out```.
 
-9. ```-cmp``` ```--compare``` Compara os arquivos ```out.out``` e ```cmp.out```.
+8. ```-cmp``` ```--compare``` Compara os arquivos ```out.out``` e ```cmp.out```.
 
     Podem entender a saída do comando [nesse](http://www.bosontreinamentos.com.br/linux/como-comparar-arquivos-no-linux-com-cmp-comm-diff-e-sdiff/) site.
 
@@ -106,11 +96,11 @@ Executar:
         48  "command": "diff"
     ```
 
-10. ```-mkfiles``` ```-make-files``` Cria os arquivos ```in.in```, ```out.out``` e ```cmp.out```.
+9. ```-mkfiles``` ```-make-files``` Cria os arquivos ```in.in```, ```out.out``` e ```cmp.out```.
 
-11. ```-rmfiles``` ```--remove-files``` Remove os arquivos ```in.in```, ```out.out```, ```cmp.out```, ```problem (.exe, no caso do windows)``` e ```*.class```.
+10. ```-rmfiles``` ```--remove-files``` Remove os arquivos ```in.in```, ```out.out```, ```cmp.out```, ```problem (.exe, no caso do windows)```, ```*.class``` e ```LOG.txt```.
 
-12. ```-sv <nome do arquivo>``` ```--save-file <nome do arquivo>``` Irá salvar o arquivo com o nome que você passou para diretório que você irá especificar. Vá ao arquivo ```src/util/settings.json``` e especifique o diretório.
+11. ```-sv <nome do arquivo>``` ```--save-file <nome do arquivo>``` Irá salvar o arquivo com o nome que você passou para diretório que você irá especificar. Vá ao arquivo ```src/util/settings.json``` e especifique o diretório.
 
     ```json
         2   "path": "<insira aqui>"
@@ -133,15 +123,15 @@ Executar:
                 2   "path": "\"C:\\foo\\bar\\pasta com espaco\""
             ```
 
-13. ```-cp``` ```--copy-file``` Irá copiar o arquivo para o diretório que você irá especificar. Vá ao arquivo ```src/util/settings.json``` e especifique o diretório.
+12. ```-cp``` ```--copy-file``` Irá copiar o arquivo para o diretório que você irá especificar. Vá ao arquivo ```src/util/settings.json``` e especifique o diretório.
 
-14. ```-uri -urip=<problema>``` ```--uri-judge --uri-problem=<problema>``` Irá criar o diretório ```TestCases/Uri/<problema>``` com os casos de teste do problema.
+13. ```-uri <problema>``` ```--uri-judge``` Irá criar o diretório ```TestCases/Uri/<problema>``` com os casos de teste do problema.
 
-15. ```-cf -cfp=<problema>``` ```--code-forces --cf-problem=<problema>``` Irá criar o diretório ```TestCases/CodeForces/<problema>``` com os casos de teste do problema.
+14. ```-cf <problema>``` ```--code-forces``` Irá criar o diretório ```TestCases/CodeForces/<problema>``` com os casos de teste do problema.
 
-16. ```-uva -uvap=<problema>``` ```--uva-judge --uva-problem=<problema>``` Irá criar o diretório ```TestCases/Uva/<problema>``` com os casos de teste do problema.
+15. ```-uva <problema>``` ```--uva-judge``` Irá criar o diretório ```TestCases/Uva/<problema>``` com os casos de teste do problema.
 
-17. ```-tc <judge> <poblem>``` ```--test-cases <judge> <poblem>``` Testa os casos de teste do problema no seu codigo e compara com a saída esperada.
+16. ```-tc <judge> <poblem>``` ```--test-cases <judge> <poblem>``` Testa os casos de teste do problema no seu algoritmo e compara com a saída esperada. Se o seu algoritmo não passar em algum dos casos teste, o arquivo ```LOG.txt``` será criado, mostrando as diferenças da saída esperada e a saída apresentada pelo seu algoritmo.
 
 * OBS: Mais de uma flag pode ser combinada, so precisa respeitar a ordem, não adianda testar algo que não compilado ainda!
 
@@ -163,11 +153,7 @@ python3 run.py -sv Teste
 ```
 
 ```bash
-python3 run.py -c -uri -urip=1001 -tc uri 1001
-```
-
-```bash
-python3 run.py -c -l=java -cf -cfp=1463F -tc cf 1463f
+python3 run.py -c -uri 1001 -tc uri 1001
 ```
 
 ### Windows
@@ -186,9 +172,5 @@ python run.py -sv Teste
 ```
 
 ```bash
-python run.py -c -uri -urip=1001 -tc uri 1001
-```
-
-```bash
-python run.py -c -l=java -cf -cfp=1463F -tc cf 1463f
+python run.py -c -uri -urip 1001 -tc uri 1001
 ```

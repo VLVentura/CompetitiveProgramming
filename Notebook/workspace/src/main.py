@@ -1,6 +1,7 @@
 import argparse
 
 import src.util.utils as util
+import src.util.colors as colors
 from src.apis.controller import ApiController
 from src.scripts.controller import ScriptsController
 
@@ -21,18 +22,24 @@ class Script:
     def _get_execute(self):
         file_name = self._file_name_to_save()
         args_to_compile = [self._args['version'], self._args['pedantic']]
-        language = self._args['lang']
+        language = None if util.get_file_extension() == None else util.get_file_extension()[1:]
+        
+        if self._args['test_cases']:
+            test_cases_args = self._args['test_cases']
+            test_cases_args.append(language)
+        else:
+            test_cases_args = None
 
-        excluded_args = ['version', 'lang', 'pedantic', 'uri_problem', 'cf_problem', 'uva_problem', 'yes_to_all']
+        excluded_args = ['version', 'pedantic']
         args = [
             val for key, val in self._args.items() if key not in excluded_args
         ]
         commands = [
             ('compile', args_to_compile), ('run', language),
-            ('test_in', language), ('test_out', language), ('test_cases', self._args['test_cases']),
-            ('make_files', language), ('remove_files', None), ('compare', None),
+            ('test_in', language), ('test_out', language), ('test_cases', test_cases_args),
+            ('make_files', None), ('remove_files', None), ('compare', None),
             ('save', file_name), ('copy', file_name),
-            ('uri', self._args['uri_problem']), ('cf', self._args['cf_problem']), ('uva', self._args['uva_problem'])
+            ('uri', self._args['uri_judge']), ('cf', self._args['code_forces']), ('uva', self._args['uva_judge'])
         ]
         return zip(args, commands)
 
@@ -53,21 +60,19 @@ class Script:
     def _get_args(self):
         """
         - Compiler Options\n
-            -c -l cpp(default) -v=14*(default) -pd=False*(default)
-            -c -l java*
-            -c -l py*
+            -c -v=14*(default) -pd=False*(default)
         
-        - General Options*
+        - General Options
             -r\n
-            -t | -tin | -tout | -tc\n
+            -tin | -tout\n
             -mkfiles | rmfiles\n
             -cmp\n
             -sv actual file name(default) | -cp
         
         - Judges\n
-            -uri -urip=problem**\n
-            -cf -cfp=problem**\n
-            -uva -uvap=problem**\n
+            -uri problem**\n
+            -cf problem**\n
+            -uva problem**\n
         
         * -> optional\n
         ** -> required
@@ -77,13 +82,10 @@ class Script:
         compiler = parser.add_argument_group('compiler options')
         compiler.add_argument('-c', '--compile', help='compile the program', action='store_true')
 
-        default_language = self._settings['default_language']
         default_version = self._settings['compiler']['cpp']['default_version']
         pedantic = self._settings['compiler']['cpp']['pedantic']
         pedantic_choices = [1, True] if pedantic is False else [0, False]
 
-        compiler.add_argument('-l', '--lang', type=str, default=default_language, choices=['cpp', 'java', 'py'],
-                              help='select the language to program: ' + default_language + ' by default')
         compiler.add_argument('-v', '--version', type=str, default=default_version, choices=['11', '14', '17'],
                               help='compiler version: ' + default_version + ' by default - c++ option')
         compiler.add_argument('-pd', '--pedantic', type=bool, default=pedantic, choices=pedantic_choices,
@@ -114,11 +116,8 @@ class Script:
                                  help='copy file to path specified at settings')
 
         judges = parser.add_argument_group('judges options')
-        judges.add_argument('-uri', '--uri-judge', help='URI "API"', action='store_true')
-        judges.add_argument('-urip', '--uri-problem', help='get tests cases from this uri problem', type=int)
-        judges.add_argument('-cf', '--code-forces', help='CodeForces "API"', action='store_true')
-        judges.add_argument('-cfp', '--cf-problem', help='get tests cases from this code forces problem', type=str)
-        judges.add_argument('-uva', '--uva-judge', help='UVa "API"', action='store_true')
-        judges.add_argument('-uvap', '--uva-problem', help='get tests cases from this uva problem', type=int)
+        judges.add_argument('-uri', '--uri-judge', help='URI "API"', nargs='?', type=str)
+        judges.add_argument('-cf', '--code-forces', help='CodeForces "API"', nargs='?', type=str)
+        judges.add_argument('-uva', '--uva-judge', help='UVa "API"', nargs='?', type=str)
 
         return vars(parser.parse_args())

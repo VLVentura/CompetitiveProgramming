@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 import src.util.colors as colors
 import src.util.utils as util
@@ -40,10 +41,12 @@ class System:
     def run(lang):
         print(colors.CBLUE2 + colors.CBOLD + 'RUNNING' + colors.CEND)
         command_to_run = System._settings[os.name]['run'][lang]
+        if lang == 'py':
+            command_to_run += ' ' + util.get_file_name(util.get_file_extension())
         os.system(command_to_run)
 
     @staticmethod
-    def make_files(lang):
+    def make_files():
         print(colors.CBLUE2 + colors.CBOLD + 'MAKING FILES' + colors.CEND)
         command_to_make_files = System._settings[os.name]['make']['input_and_output_files']
         os.system(command_to_make_files)
@@ -52,7 +55,10 @@ class System:
     def remove_files():
         print(colors.CBLUE2 + colors.CBOLD + 'REMOVING FILES' + colors.CEND)
         command_to_remove_files = System._settings[os.name]['remove_files']
-        os.system(command_to_remove_files)
+        subprocess.call(
+            [command_to_remove_files],
+            shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
 
     @staticmethod
     def save_file(file_name):

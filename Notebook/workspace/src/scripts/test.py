@@ -44,31 +44,41 @@ class Test:
                 break
 
         if problem_folder is None:
-            print('{} not found'.format(problems_path))
+            print('problem folder not found')
             exit(-1)
 
-        file_extension = util.get_file_extension().split('.')[1]
+        file_extension = args[2]
         command_to_run = Test._settings[os.name]['run'][file_extension]
         command_to_compare = Test._settings[os.name]['compare']['command']
         input_path = '\'' + problem_folder + 'input/'
         output_path = problem_folder + 'output/'
-
+        log_file = ''
+        
+        print(colors.CBLUE2 + colors.CBOLD + 'RESULTS' + colors.CEND)
         for i in range(len(os.listdir(problem_folder + 'input/'))):
-            os.system(command_to_run + ' < {}in{}.in\' > out.out'.format(input_path, i))
+            subprocess.call(
+                [command_to_run + ' < ' + '{}in{}.in\''.format(input_path, i) + ' > ' + 'out.out'], 
+                shell=True
+            )
             output_from_compare = subprocess.run(
-                [command_to_compare, 'out.out', '{}cmp{}.out'.format(output_path, i)], 
+                [command_to_compare, 'out.out', '{}cmp{}.out'.format(output_path, i)],
                 capture_output=True
             )
             if output_from_compare.returncode == 1:
                 print(colors.CRED2 + colors.CBOLD + ' X | TEST CASE #{} - FAILED'.format(i + 1) + colors.CEND)
-                print(output_from_compare.stdout.decode('utf-8'))
+                log_file += 'X | TEST CASE #{} - FAILED\n'.format(i + 1) + output_from_compare.stdout.decode('utf-8') + '\n'
             elif output_from_compare.returncode == 0:
                 print(colors.CGREEN2 + colors.CBOLD + 'OK | TEST CASE #{} - SUCCESS'.format(i + 1) + colors.CEND)
+        
+        if log_file:
+            with open('LOG.txt', 'w') as file:
+                file.write(log_file)
+            print(colors.CVIOLET + colors.CBOLD + '--  check LOG.txt to see the errors --' + colors.CEND)
 
     @staticmethod
     def compare():
         warning_message = Test._settings[os.name]['compare']['warning_message']
         print(colors.CBLUE2 + colors.CBOLD + 'COMPARING out.out and cmp.out' + colors.CEND.format())
-        print(colors.CGREEN2 + colors.CBOLD + '--  {} --'.format(warning_message) + colors.CEND)
+        print(colors.CVIOLET + colors.CBOLD + '--  {} --'.format(warning_message) + colors.CEND)
         command_to_compare = Test._settings[os.name]['compare']['execute']
         os.system(command_to_compare)

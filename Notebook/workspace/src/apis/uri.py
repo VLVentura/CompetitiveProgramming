@@ -56,7 +56,9 @@ class Uri:
                 'https://www.udebug.com/output_api/output/retrieve.json?input_id={}'.format(case),
                 headers=authorization
             )
-            test_cases.append((input_data.json()[0], output_data.json()[0]))
+            test_cases.append(
+                (input_data.json()[0].replace('\r', ''), output_data.json()[0].replace('\r', ''))
+            )
 
     def _get_problems_ids(self, authorization, problem):
         self._response = requests.get(
