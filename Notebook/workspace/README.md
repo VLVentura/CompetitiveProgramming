@@ -172,5 +172,5 @@ python run.py -sv Teste
 ```
 
 ```bash
-python run.py -c -uri -urip 1001 -tc uri 1001
+python run.py -c -uri 1001 -tc uri 1001
 ```
