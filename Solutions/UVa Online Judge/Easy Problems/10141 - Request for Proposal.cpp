@@ -32,7 +32,8 @@ int main(){
 				max_compliance = compliance;
 				max_price = price;
 				max_name = proposal_name;
-			} else if(compliance == max_compliance){
+			} 
+			else if(compliance == max_compliance){
 				if(price < max_price){
 					max_compliance = compliance;
 					max_price = price;
