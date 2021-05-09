@@ -58,17 +58,19 @@ class Test:
         for i in range(len(os.listdir(problem_folder + 'input/'))):
             subprocess.call(
                 [command_to_run + ' < ' + '{}in{}.in\''.format(input_path, i) + ' > ' + 'out.out'], 
-                shell=True
+                shell=True, timeout=1
             )
             output_from_compare = subprocess.run(
                 [command_to_compare, 'out.out', '{}cmp{}.out'.format(output_path, i)],
-                capture_output=True
+                capture_output=True, timeout=1
             )
             if output_from_compare.returncode == 1:
                 print(colors.CRED2 + colors.CBOLD + ' X | TEST CASE #{} - FAILED'.format(i + 1) + colors.CEND)
                 log_file += 'X | TEST CASE #{} - FAILED\n'.format(i + 1) + output_from_compare.stdout.decode('utf-8') + '\n'
             elif output_from_compare.returncode == 0:
                 print(colors.CGREEN2 + colors.CBOLD + 'OK | TEST CASE #{} - SUCCESS'.format(i + 1) + colors.CEND)
+            else:
+                print(output_from_compare.stdout.decode('utf-8'))
         
         if log_file:
             with open('LOG.txt', 'w') as file:

@@ -1,11 +1,11 @@
 {
-    "udebug_authorization_code": "CODE_GOES_HERE",
-    "path_to_save_file": "PATH_TO_SAVE_FILE",
+    "udebug_authorization_code": "",
+    "path_to_save_file": "", 
     "compiler": {
         "cpp": {
             "default_version": "14",
             "pedantic": false,
-            "compile": "g++ -O2 -Wall -std=c++"
+            "compile": "g++ -O2 -Wall -DLOCAL -std=c++"
         },
         "java": {
             "compile": "javac -Xlint:all"

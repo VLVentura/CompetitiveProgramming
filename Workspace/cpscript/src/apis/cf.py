@@ -8,8 +8,16 @@ class Cf:
         """
         :return param problem_data: list of tuples -> tuple[0]: input, tuple[1]: input
         """
-        self._problem = self._parser_problem(problem)
-        self._url = 'https://codeforces.com/problemset/problem/{}/{}'.format(self._problem[0], self._problem[1])
+        self._is_contest = True if problem[0] == 'C' else False
+        
+        if self._is_contest:
+            problem = problem[1:]
+            self._problem = self._parser_problem(problem)
+            self._url = 'https://codeforces.com/contest/{}/problem/{}'.format(self._problem[0], self._problem[1])
+        else:
+            self._problem = self._parser_problem(problem)
+            self._url = 'https://codeforces.com/problemset/problem/{}/{}'.format(self._problem[0], self._problem[1])
+
         self._page = requests.get(self._url)
         self._html = BeautifulSoup(self._page.content, 'html.parser')
 
