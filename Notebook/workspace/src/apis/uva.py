@@ -36,6 +36,7 @@ class Uva:
 
     def _get_test_cases(self, problem):
         test_cases = []
+        
         for case in self._get_problems_ids(problem):
             input_data = requests.get(
                 'https://www.udebug.com/input_api/input/retrieve.json?input_id={}'.format(case),
@@ -45,14 +46,16 @@ class Uva:
                 'https://www.udebug.com/output_api/output/retrieve.json?input_id={}'.format(case),
                 headers=self._authorization
             )
+            
             if input_data.status_code == requests.codes.ok and output_data.status_code == requests.codes.ok:
                 test_cases.append(
                     (input_data.json()[0].replace('\r', ''), output_data.json()[0].replace('\r', ''))
                 )
-                return test_cases
             else:
                 print('Error trying to access data from uDebug API')
                 exit(-1)
+
+        return test_cases
 
 
     def _get_problem_name(self, problem):
